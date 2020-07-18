@@ -1,0 +1,23 @@
+{
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-yangltech-dev-173812-authRole",
+            "UnauthRoleArn": "arn:aws:iam::483174155847:role/amplify-yangltech-dev-173812-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::483174155847:role/amplify-yangltech-dev-173812-authRole",
+            "Region": "eu-west-1",
+            "DeploymentBucketName": "amplify-yangltech-dev-173812-deployment",
+            "UnauthRoleName": "amplify-yangltech-dev-173812-unauthRole",
+            "StackName": "amplify-yangltech-dev-173812",
+            "StackId": "arn:aws:cloudformation:eu-west-1:483174155847:stack/amplify-yangltech-dev-173812/b1a802f0-c90c-11ea-8a8e-02bc3c3f62ee",
+            "AmplifyAppId": "d1qyfkanjf5lqp"
+        },
+        "categories": {
+            "hosting": {
+                "amplifyhosting": {
+                    "appId": "d1qyfkanjf5lqp",
+                    "type": "cicd"
+                }
+            }
+        }
+    }
+}
