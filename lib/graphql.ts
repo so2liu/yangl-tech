@@ -21,6 +21,6 @@ export async function fetchGitHub(
   if (json.errors) {
     throw new Error("Failed to fetch API");
   }
-  console.log("++++", JSON.stringify(json.data, null, 2));
+
   return json.data as GitHubRespository_posts;
 }

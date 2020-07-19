@@ -37,7 +37,7 @@ export async function getPostData(id: string, posts: GitHubRespository_posts) {
   const contentHtml = processedContent.toString();
 
   return {
-    id,
+    id: id,
     contentHtml,
     ...matterResult.data,
   };
