@@ -5,6 +5,7 @@ import Date from "../../components/date";
 import utilSStyles from "../../styles/utils.module.css";
 import { GetStaticPaths } from "next";
 import { fetchGitHub } from "../../lib/graphql";
+import { GitHubRespository_posts, githubDirectoryQuery } from "../../lib/query";
 
 export default function Post({ postData }) {
   return (
@@ -24,7 +25,9 @@ export default function Post({ postData }) {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const blogs = await fetchGitHub();
+  const blogs = await fetchGitHub<GitHubRespository_posts>(
+    githubDirectoryQuery("posts")
+  );
   const paths = getAllPostIds(blogs);
   return {
     paths,
@@ -33,7 +36,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps = async ({ params }) => {
-  const blogs = await fetchGitHub();
+  const blogs = await fetchGitHub<GitHubRespository_posts>(
+    githubDirectoryQuery("posts")
+  );
 
   const postData = await getPostData(params.id, blogs);
 

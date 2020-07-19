@@ -1,10 +1,8 @@
-export const githubQuery = (
-  owner: string,
-  respositoryName: string,
-  folderName: string = ""
-) => `
+import config from "../utils/config";
+
+export const githubDirectoryQuery = (folderName: string = "") => `
   query {
-    repository(owner: "${owner}", name: "${respositoryName}") {
+    repository(owner: "${config.githubUsername}", name: "${config.githubRepositoryName}") {
       object(expression: "master:${folderName}") {
         ... on Tree {
           entries {
@@ -32,6 +30,29 @@ export interface GitHubRespository_posts {
           };
         }
       ];
+    };
+  };
+}
+
+export const githubSingleFileQuery = (fileName: string = "") => `
+  query {
+  repository(owner: "${config.githubUsername}", name: "${config.githubRepositoryName}") {
+    object(expression: "master:${fileName}") {
+      ... on Blob {
+        text
+      }
+    }
+  }
+}
+
+`;
+
+export interface GitHubSingleFileQuery {
+  data: {
+    respository: {
+      object: {
+        text: string;
+      };
     };
   };
 }

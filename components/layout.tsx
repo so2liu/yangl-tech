@@ -38,7 +38,11 @@ function Layout({
               className={`${styles.headerHomeImage} ${utilStyles.borderCircle}`}
               alt={name}
             />
-            <h1 className={utilStyles.heading2Xl}>{name}</h1>
+            <h1 className={utilStyles.heading2Xl}>
+              <Link href="/cv">
+                <a>{name}</a>
+              </Link>
+            </h1>
           </>
         ) : (
           <>

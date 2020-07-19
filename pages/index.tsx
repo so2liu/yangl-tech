@@ -6,6 +6,7 @@ import utilStyles from "../styles/utils.module.css";
 import { getSortedPostsFromGitHub } from "../lib/posts";
 import { GetStaticProps } from "next";
 import { fetchGitHub } from "../lib/graphql";
+import { githubDirectoryQuery, GitHubRespository_posts } from "../lib/query";
 
 export default function Home({
   allPostsData,
@@ -48,7 +49,9 @@ export default function Home({
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const blogs = await fetchGitHub();
+  const blogs = await fetchGitHub<GitHubRespository_posts>(
+    githubDirectoryQuery("posts")
+  );
   const allPostsData = getSortedPostsFromGitHub(blogs);
   return {
     props: {
