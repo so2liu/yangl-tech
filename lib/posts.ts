@@ -24,8 +24,10 @@ export function getAllPostIds(posts: GitHubRespository_posts) {
 }
 
 export async function getPostData(id: string, posts: GitHubRespository_posts) {
-  const fileContent = posts.repository.object.entries.find((p) => p.name === id)
-    .object.text;
+  const fileContent = posts.repository.object.entries.find(
+    (p) => p.name === `${id}.md`
+  ).object.text;
+  if (!fileContent) throw Error(`Unknown id ${id}`);
 
   const matterResult = validateMatter(matter(fileContent));
 
