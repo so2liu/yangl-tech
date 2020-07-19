@@ -1,6 +1,6 @@
 import Layout from "../components/layout";
 import Head from "next/head";
-import CV from "./posts/cv.types";
+import CV from "../utils/cv.types";
 import { Language } from "./_app";
 import cv from "../mock/cv";
 import GitHubCalendar from "react-github-calendar";
