@@ -3,8 +3,9 @@ import Link from "next/link";
 import Layout, { siteTitle } from "../components/layout";
 import Date from "../components/date";
 import utilStyles from "../styles/utils.module.css";
-import { getSortedPostsData } from "../lib/posts";
+import { getSortedPostsFromGitHub } from "../lib/posts";
 import { GetStaticProps } from "next";
+import { fetchGitHub } from "../lib/graphql";
 
 export default function Home({
   allPostsData,
@@ -21,7 +22,7 @@ export default function Home({
         <title>{siteTitle}</title>
       </Head>
       <section className={utilStyles.headingMd}>
-        <p>Ok, I am Yang. I want to be a software developer.</p>
+        <p>Ok, I am Yang. I am trying to be a software developer.</p>
       </section>
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
         <h2 className={utilStyles.headingLg}>Blog</h2>
@@ -44,8 +45,8 @@ export default function Home({
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const allPostsData = getSortedPostsData();
-
+  const blogs = await fetchGitHub();
+  const allPostsData = getSortedPostsFromGitHub(blogs);
   return {
     props: {
       allPostsData,

@@ -1,40 +1,31 @@
-import fs from "fs";
-import path from "path";
 import matter from "gray-matter";
 import remark from "remark";
 import html from "remark-html";
 import _ from "lodash";
+import { GitHubRespository_posts } from "./query";
 
-const postsDirectory = path.join(process.cwd(), "posts");
-
-export function getSortedPostsData() {
-  const fileNames = fs.readdirSync(postsDirectory);
-  const allPosts = fileNames.map((fileName) => {
-    const id = fileName.replace(/\.md$/, "");
-
-    const fullPath = path.join(postsDirectory, fileName);
-    const fileContent = fs.readFileSync(fullPath, "utf8");
-
-    const matterResult = validateMatter(matter(fileContent));
-    return { id, ...matterResult.data };
-  });
+export function getSortedPostsFromGitHub(posts: GitHubRespository_posts) {
+  const allPosts = posts.repository.object.entries.map(
+    ({ name: id, object }) => {
+      const matterResult = validateMatter(matter(object.text));
+      return { id, ...matterResult.data };
+    }
+  );
 
   return allPosts.sort((a, b) => (a.date < b.date ? 1 : -1));
 }
 
-export function getAllPostIds() {
-  const fileNames = fs.readdirSync(postsDirectory);
-
-  return fileNames.map((fileName) => ({
+export function getAllPostIds(posts: GitHubRespository_posts) {
+  return posts.repository.object.entries.map(({ name }) => ({
     params: {
-      id: fileName.replace(/\.md$/, ""),
+      id: name.replace(/\.md$/, ""),
     },
   }));
 }
 
-export async function getPostData(id: string) {
-  const fullPath = path.join(postsDirectory, `${id}.md`);
-  const fileContent = fs.readFileSync(fullPath, "utf8");
+export async function getPostData(id: string, posts: GitHubRespository_posts) {
+  const fileContent = posts.repository.object.entries.find((p) => p.name === id)
+    .object.text;
 
   const matterResult = validateMatter(matter(fileContent));
 
