@@ -1,7 +1,13 @@
 import styles from "./alert.module.css";
 import cn from "classnames";
 
-export default function Alert({ children, type }) {
+export default function Alert({
+  children,
+  type,
+}: {
+  children: React.ReactNode;
+  type: AlertType;
+}) {
   return (
     <div
       className={cn({
@@ -12,4 +18,9 @@ export default function Alert({ children, type }) {
       {children}
     </div>
   );
+}
+
+enum AlertType {
+  Success = "success",
+  Error = "error",
 }
