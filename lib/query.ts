@@ -48,11 +48,9 @@ export const githubSingleFileQuery = (fileName: string = "") => `
 `;
 
 export interface GitHubSingleFileQuery {
-  data: {
-    respository: {
-      object: {
-        text: string;
-      };
+  repository: {
+    object: {
+      text: string;
     };
   };
 }

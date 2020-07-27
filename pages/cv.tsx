@@ -1,40 +1,44 @@
 import Layout from "../components/layout";
-import Head from "next/head";
-import CV from "../utils/cv.types";
-import { Language } from "./_app";
-import cv from "../mock/cv";
 import GitHubCalendar from "react-github-calendar";
+import { fetchGitHub } from "../lib/graphql";
+import { githubSingleFileQuery, GitHubSingleFileQuery } from "../lib/query";
+import { getCV } from "../lib/cv";
+import Head from "next/head";
 
-export default function Post({ cv, language }: { cv: CV; language: Language }) {
+export default function Post({ cv }: { cv: any }) {
+  const { name, contentHtml, githubUsername, title } = cv;
   return (
     <Layout>
       <Head>
-        <title>{cv.name[language]}</title>
+        <title>{[name, title].join(" ")}</title>
       </Head>
-      {cv.github?.displayCalendar && (
-        <>
-          <GitHubCalendar username={cv.github.username} />
-          <a href={`https://www.github.com/${cv.github.username}`}>
-            @{cv.github.username}
-          </a>
-        </>
-      )}
+      <>
+        <GitHubCalendar
+          username={githubUsername}
+          fontSize={20}
+          color="hsl(203, 82%, 33%)"
+          showTotalCount={false}
+        />
+        <a href={`https://www.github.com/${githubUsername}`}>
+          @{githubUsername}
+        </a>{" "}
+        on GitHub
+      </>
+
       <section>
-        <h2>Personal Info</h2>
-        <address>
-          <ul>
-            <li>
-              <a href={`mailto:${cv.email}`}>{cv.email}</a>
-            </li>
-            <li>{cv.location[language]}</li>
-          </ul>
-        </address>
+        <div dangerouslySetInnerHTML={{ __html: contentHtml }} />
       </section>
     </Layout>
   );
 }
 
 export const getStaticProps = async () => {
+  const cvFile = await fetchGitHub<GitHubSingleFileQuery>(
+    githubSingleFileQuery(`cv-CN.md`)
+  );
+
+  const cv = await getCV(cvFile);
+
   return {
     props: {
       cv,

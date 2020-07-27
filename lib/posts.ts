@@ -2,7 +2,7 @@ import matter from "gray-matter";
 import remark from "remark";
 import html from "remark-html";
 import _ from "lodash";
-import { GitHubRespository_posts } from "./query";
+import { GitHubRespository_posts, GitHubSingleFileQuery } from "./query";
 
 export function getSortedPostsFromGitHub(posts: GitHubRespository_posts) {
   const allPosts = posts.repository.object.entries.map(
@@ -45,11 +45,17 @@ export async function getPostData(id: string, posts: GitHubRespository_posts) {
 
 function validateMatter(input: any): MatterResult {
   const { content, data } = input;
+
   const { title, date } = data;
-  if (!_.isString(content) || !_.isString(title) || !_.isString(date))
+  if (!(title && data))
     throw new Error(
-      `Invalid matter properties in markdown file: ${title} ${date}`
+      `Invalid matter properties in markdown file ${JSON.stringify(
+        data,
+        null,
+        2
+      )}`
     );
+
   return {
     content,
     data: {
