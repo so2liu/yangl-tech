@@ -1,6 +1,7 @@
 import { AppProps } from "next/app";
 import { useState } from "react";
 import "../styles/global.css";
+import "../styles/cv.css";
 
 function App({ Component, pageProps }: AppProps) {
   const [lang, setLang] = useState<Language>("CN");
