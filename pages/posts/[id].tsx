@@ -12,6 +12,16 @@ export default function Post({ postData }) {
     <Layout>
       <Head>
         <title>{postData.title}</title>
+        <link
+          key="hljs-css"
+          href="https://cdn.bootcss.com/highlight.js/9.12.0/styles/default.min.css"
+          rel="stylesheet"
+        />
+        <script
+          key="hljs-js"
+          src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"
+        />
+        <script key="hljs-use">hljs.initHighlightingOnLoad();</script>
       </Head>
       <article>
         <h1 className={utilSStyles.headingXl}>{postData.title}</h1>
