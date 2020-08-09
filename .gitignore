@@ -46,4 +46,5 @@ amplify-gradle-config.json
 amplifytools.xcconfig
 
 **/*.env 
+**/*.env.local
 next.config.js
