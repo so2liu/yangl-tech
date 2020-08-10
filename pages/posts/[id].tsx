@@ -14,7 +14,7 @@ export default function Post({ postData }) {
         <title>{postData.title}</title>
         <link
           key="hljs-css"
-          href="https://cdn.bootcss.com/highlight.js/9.12.0/styles/default.min.css"
+          href="https://cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css"
           rel="stylesheet"
         />
         <script
