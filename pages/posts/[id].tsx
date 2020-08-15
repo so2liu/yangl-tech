@@ -6,7 +6,6 @@ import utilSStyles from "../../styles/utils.module.css";
 import { GetStaticPaths } from "next";
 import { fetchGitHub } from "../../lib/graphql";
 import { GitHubRespository_posts, githubDirectoryQuery } from "../../lib/query";
-import Highlight from "react-highlight";
 
 export default function Post({ postData }) {
   return (
