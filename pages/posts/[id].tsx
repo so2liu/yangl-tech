@@ -6,6 +6,7 @@ import utilSStyles from "../../styles/utils.module.css";
 import { GetStaticPaths } from "next";
 import { fetchGitHub } from "../../lib/graphql";
 import { GitHubRespository_posts, githubDirectoryQuery } from "../../lib/query";
+import Highlight from "react-highlight";
 
 export default function Post({ postData }) {
   return (
@@ -13,15 +14,11 @@ export default function Post({ postData }) {
       <Head>
         <title>{postData.title}</title>
         <link
-          key="hljs-css"
-          href="https://cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css"
           rel="stylesheet"
+          href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/styles/default.min.css"
         />
-        <script
-          key="hljs-js"
-          src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"
-        />
-        <script key="hljs-use">hljs.initHighlightingOnLoad();</script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
       </Head>
       <article>
         <h1 className={utilSStyles.headingXl}>{postData.title}</h1>
