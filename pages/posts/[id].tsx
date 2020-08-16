@@ -14,9 +14,9 @@ export default function Post({ postData }) {
         <title>{postData.title}</title>
         <link
           rel="stylesheet"
-          href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/styles/default.min.css"
+          href="//cdnjs.loli.net/ajax/libs/highlight.js/10.1.2/styles/github.min.css"
         />
-        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/highlight.min.js"></script>
+        <script src="//cdnjs.loli.net/ajax/libs/highlight.js/10.1.2/highlight.min.js"></script>
         <script>hljs.initHighlightingOnLoad();</script>
       </Head>
       <article>
