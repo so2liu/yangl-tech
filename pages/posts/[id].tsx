@@ -6,28 +6,45 @@ import utilSStyles from "../../styles/utils.module.css";
 import { GetStaticPaths } from "next";
 import { fetchGitHub } from "../../lib/graphql";
 import { GitHubRespository_posts, githubDirectoryQuery } from "../../lib/query";
+import ReactMarkdown from "react-markdown";
+import SyntaxHighlighter from "react-syntax-highlighter";
 
 export default function Post({ postData }) {
-  return (
-    <Layout>
-      <Head>
-        <title>{postData.title}</title>
-        <link
-          rel="stylesheet"
-          href="//cdnjs.loli.net/ajax/libs/highlight.js/10.1.2/styles/github.min.css"
-        />
-        <script src="//cdnjs.loli.net/ajax/libs/highlight.js/10.1.2/highlight.min.js"></script>
-        <script>hljs.initHighlightingOnLoad();</script>
-      </Head>
-      <article>
-        <h1 className={utilSStyles.headingXl}>{postData.title}</h1>
-        <div className={utilSStyles.lightText}>
-          <Date dateString={postData.date} />
-        </div>
-        <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
-      </article>
-    </Layout>
-  );
+    return (
+        <Layout>
+            <Head>
+                <title>{postData.title}</title>
+            </Head>
+            <article>
+                <h1 className={utilSStyles.headingXl}>{postData.title}</h1>
+                <div className={utilSStyles.lightText}>
+                    <Date dateString={postData.date} />
+                </div>
+                <ReactMarkdown
+                    children={postData.markdown as string}
+                    components={{
+                        code({ node, inline, className, children, ...props }) {
+                            return !inline ? (
+                                <SyntaxHighlighter
+                                    children={String(children).replace(
+                                        /\n$/,
+                                        ""
+                                    )}
+                                    language="typescript"
+                                    PreTag="div"
+                                    {...props}
+                                />
+                            ) : (
+                                <code className={className} {...props}>
+                                    {children}
+                                </code>
+                            );
+                        },
+                    }}
+                />
+            </article>
+        </Layout>
+    );
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {

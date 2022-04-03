@@ -14,6 +14,7 @@ import {
 } from "../lib/query";
 import GitHubCalendar from "react-github-calendar";
 import { getCV } from "../lib/cv";
+import "highlight.js/styles/github.css";
 
 export default function Home({
   allPostsData,
