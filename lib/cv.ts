@@ -1,6 +1,6 @@
 import { GitHubSingleFileQuery } from "./query";
 import matter from "gray-matter";
-import remark from "remark";
+import { remark } from "remark";
 import html from "remark-html";
 import unified from "unified";
 import parse from "rehype-parse";
@@ -8,7 +8,6 @@ import slug from "rehype-slug";
 import toc from "@jsdevtools/rehype-toc";
 import stringify from "rehype-stringify";
 import _ from "lodash";
-import vfile from "to-vfile";
 
 export async function getCV(file: GitHubSingleFileQuery) {
   const content = file.repository.object.text;
