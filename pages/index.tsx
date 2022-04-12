@@ -95,6 +95,17 @@ export default function Home({
                     })}
                 </ul>
             </section>
+            <footer
+                style={{
+                    marginTop: 60,
+                    display: "flex",
+                    justifyContent: "center",
+                }}
+            >
+                <a href="https://beian.miit.gov.cn/" target="_blank">
+                    京ICP备2021034302号-1{" "}
+                </a>
+            </footer>
         </Layout>
     );
 }
